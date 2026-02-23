@@ -1,37 +1,37 @@
-﻿public class Program
-    
+﻿using System;
+using QuantityMeasurementApp.Model;
+
+namespace QuantityMeasurementApp
+{
+    class Program
     {
-        public static bool CompareFeet(double value1, double value2)
-        {
-            QuantityMeasurementApp.Feet f1 = new QuantityMeasurementApp.Feet(value1);
-            QuantityMeasurementApp.Feet f2 = new QuantityMeasurementApp.Feet(value2);
-
-            return f1.Equals(f2);
-        }
-
-        public static bool CompareInches(double value1, double value2)
-        {
-            QuantityMeasurementApp.Inches i1 = new QuantityMeasurementApp.Inches(value1);
-            QuantityMeasurementApp.Inches i2 = new QuantityMeasurementApp.Inches(value2);
-
-            return i1.Equals(i2);
-        }
         static void Main(string[] args)
         {
-             bool inchResult =
-                Program.CompareInches(1.0, 1.0);
+            try
+            {
+                Console.WriteLine("Enter value:");
+                double value = Convert.ToDouble(Console.ReadLine());
 
-            bool feetResult =
-                Program.CompareFeet(1.0, 1.0);
+                Console.WriteLine("Enter unit (FEET / INCH):");
+                string unitInput = Console.ReadLine()?.ToUpper();
 
-            Console.WriteLine("Input: 1.0 inch and 1.0 inch");
-            Console.WriteLine($"Output: Equal ({inchResult})");
+                Unit unit = unitInput switch
+                {
+                    "FEET" => Unit.FEET,
+                    "INCH" => Unit.INCH,
+                    _ => throw new ArgumentException("Invalid unit entered")
+                };
 
-            Console.WriteLine();
+                Quantity quantity = new Quantity(value, unit);
 
-            Console.WriteLine("Input: 1.0 ft and 1.0 ft");
-            Console.WriteLine($"Output: Equal ({feetResult})");
+                Console.WriteLine($"Quantity created: {quantity.Value} {quantity.Unit}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
 
             Console.ReadLine();
         }
     }
+}
