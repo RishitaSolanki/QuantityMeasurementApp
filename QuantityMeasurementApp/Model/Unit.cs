@@ -1,7 +1,5 @@
-
 namespace QuantityMeasurementApp.Model
 {
-  
     public enum Unit
     {
         FEET,
@@ -37,4 +35,3 @@ namespace QuantityMeasurementApp.Model
         }
     }
 }
-    
