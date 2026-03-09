@@ -1,4 +1,4 @@
-﻿﻿﻿namespace QuantityMeasurementApp;
+﻿namespace QuantityMeasurementApp;
     internal class Program
     {
        static void Main()

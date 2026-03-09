@@ -1,6 +1,6 @@
 
-using QuantityMeasurementApp.Business.Interfaces;
-using QuantityMeasurementApp.Business.Services;
+using QuantityMeasurementApp;
+
 using QuantityMeasurementApp.Model;
 namespace QuantityMeasurementApp;
     internal class Menu
@@ -8,23 +8,26 @@ namespace QuantityMeasurementApp;
         public static void StartApp()
         {
 
-            IQuantityLength utility = new QuantityLengthUtility();
+           Console.WriteLine("Enter first value:");
+                double value1 = Convert.ToDouble(Console.ReadLine());
 
-            Console.WriteLine("Enter First Value:");
-            double value1 = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Enter first unit (FEET / INCH / YARD / CENTIMETER):");
+                Unit unit1 = (Unit)Enum.Parse(typeof(Unit), Console.ReadLine().ToUpper());
 
-            Console.WriteLine("Enter First Unit (Feet/Inch):");
-            Unit unit1 = (Unit)Enum.Parse(typeof(Unit), Console.ReadLine(), true);
+                Console.WriteLine("Enter second value:");
+                double value2 = Convert.ToDouble(Console.ReadLine());
 
-            Console.WriteLine("Enter Second Value:");
-            double value2 = Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Enter second unit (FEET / INCH / YARD / CENTIMETER):");
+                Unit unit2 = (Unit)Enum.Parse(typeof(Unit), Console.ReadLine().ToUpper());
 
-            Console.WriteLine("Enter Second Unit (Feet/Inch):");
-            Unit unit2 = (Unit)Enum.Parse(typeof(Unit), Console.ReadLine(), true);
+                Quantity q1 = new Quantity(value1, unit1);
+                Quantity q2 = new Quantity(value2, unit2);
 
-            bool result = utility.CheckEquality(value1, unit1, value2, unit2);
+                Quantity result = q1.Add(q2);
 
-            Console.WriteLine("Equality Result: " + result);
+                Console.WriteLine($"Result: {result.Value} {result.Unit}");
+            }
+           
 
         }
-    }
+    
