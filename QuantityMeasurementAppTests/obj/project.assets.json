@@ -1084,6 +1084,43 @@
         "runtime": {
           "bin/placeholder/QuantityMeasurementApp.dll": {}
         }
+      },
+      "QuantityMeasurementApp.BussinessLayer/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "QuantityMeasurementApp.Model": "1.0.0",
+          "QuantityMeasurementApp.RepositoryLayer": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/QuantityMeasurementApp.BussinessLayer.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/QuantityMeasurementApp.BussinessLayer.dll": {}
+        }
+      },
+      "QuantityMeasurementApp.Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/QuantityMeasurementApp.Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/QuantityMeasurementApp.Model.dll": {}
+        }
+      },
+      "QuantityMeasurementApp.RepositoryLayer/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "QuantityMeasurementApp.Model": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/QuantityMeasurementApp.RepositoryLayer.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/QuantityMeasurementApp.RepositoryLayer.dll": {}
+        }
       }
     }
   },
@@ -2282,12 +2319,29 @@
       "type": "project",
       "path": "../QuantityMeasurementApp/QuantityMeasurementApp.csproj",
       "msbuildProject": "../QuantityMeasurementApp/QuantityMeasurementApp.csproj"
+    },
+    "QuantityMeasurementApp.BussinessLayer/1.0.0": {
+      "type": "project",
+      "path": "../QuantityMeasurementApp.BussinessLayer/QuantityMeasurementApp.BussinessLayer.csproj",
+      "msbuildProject": "../QuantityMeasurementApp.BussinessLayer/QuantityMeasurementApp.BussinessLayer.csproj"
+    },
+    "QuantityMeasurementApp.Model/1.0.0": {
+      "type": "project",
+      "path": "../QuantityMeasurementApp.Model/QuantityMeasurementApp.Model.csproj",
+      "msbuildProject": "../QuantityMeasurementApp.Model/QuantityMeasurementApp.Model.csproj"
+    },
+    "QuantityMeasurementApp.RepositoryLayer/1.0.0": {
+      "type": "project",
+      "path": "../QuantityMeasurementApp.RepositoryLayer/QuantityMeasurementApp.RepositoryLayer.csproj",
+      "msbuildProject": "../QuantityMeasurementApp.RepositoryLayer/QuantityMeasurementApp.RepositoryLayer.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
       "MSTest >= 4.0.1",
-      "QuantityMeasurementApp >= 1.0.0"
+      "QuantityMeasurementApp >= 1.0.0",
+      "QuantityMeasurementApp.BussinessLayer >= 1.0.0",
+      "QuantityMeasurementApp.Model >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -2323,6 +2377,12 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "projectReferences": {
+            "D:\\QuantityMeasurementApp\\QuantityMeasurementApp.BussinessLayer\\QuantityMeasurementApp.BussinessLayer.csproj": {
+              "projectPath": "D:\\QuantityMeasurementApp\\QuantityMeasurementApp.BussinessLayer\\QuantityMeasurementApp.BussinessLayer.csproj"
+            },
+            "D:\\QuantityMeasurementApp\\QuantityMeasurementApp.Model\\QuantityMeasurementApp.Model.csproj": {
+              "projectPath": "D:\\QuantityMeasurementApp\\QuantityMeasurementApp.Model\\QuantityMeasurementApp.Model.csproj"
+            },
             "D:\\QuantityMeasurementApp\\QuantityMeasurementApp\\QuantityMeasurementApp.csproj": {
               "projectPath": "D:\\QuantityMeasurementApp\\QuantityMeasurementApp\\QuantityMeasurementApp.csproj"
             }
@@ -2339,7 +2399,7 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.100"
+      "SdkAnalysisLevel": "10.0.200"
     },
     "frameworks": {
       "net10.0": {
@@ -2366,7 +2426,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.101/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",

@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuantityMeasurementApp.Model;
+using QuantityMeasurementApp.Model.Enums;
 using System;
 
 namespace QuantityMeasurementApp.Tests
@@ -179,7 +180,7 @@ namespace QuantityMeasurementApp.Tests
             QuantityWeight w1 = new QuantityWeight(1.0, WeightUnit.KILOGRAM);
             try
             {
-                w1.Add(null);
+                w1.Add(null!);
                 Assert.Fail("Expected ArgumentException was not thrown.");
             }
             catch (ArgumentException)

@@ -17,6 +17,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\QuantityMeasurementApp\QuantityMeasurementApp.csproj" />
+    <ProjectReference Include="..\QuantityMeasurementApp.Model\QuantityMeasurementApp.Model.csproj" />
+    <ProjectReference Include="..\QuantityMeasurementApp.BussinessLayer\QuantityMeasurementApp.BussinessLayer.csproj" />
   </ItemGroup>
 
 </Project>

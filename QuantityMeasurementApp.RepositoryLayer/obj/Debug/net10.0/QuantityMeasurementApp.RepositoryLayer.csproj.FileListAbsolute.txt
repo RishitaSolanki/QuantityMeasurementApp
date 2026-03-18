@@ -1,0 +1,16 @@
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\bin\Debug\net10.0\QuantityMeasurementApp.RepositoryLayer.deps.json
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\bin\Debug\net10.0\QuantityMeasurementApp.RepositoryLayer.dll
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\bin\Debug\net10.0\QuantityMeasurementApp.RepositoryLayer.pdb
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\bin\Debug\net10.0\QuantityMeasurementApp.Model.dll
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\bin\Debug\net10.0\QuantityMeasurementApp.Model.pdb
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\obj\Debug\net10.0\QuantityMeasurementApp.RepositoryLayer.csproj.AssemblyReference.cache
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\obj\Debug\net10.0\QuantityMeasurementApp.RepositoryLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\obj\Debug\net10.0\QuantityMeasurementApp.RepositoryLayer.AssemblyInfoInputs.cache
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\obj\Debug\net10.0\QuantityMeasurementApp.RepositoryLayer.AssemblyInfo.cs
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\obj\Debug\net10.0\QuantityMeasurementApp.RepositoryLayer.csproj.CoreCompileInputs.cache
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\obj\Debug\net10.0\QuantityMeasurementApp.RepositoryLayer.sourcelink.json
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\obj\Debug\net10.0\Quantity.65CC22B0.Up2Date
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\obj\Debug\net10.0\QuantityMeasurementApp.RepositoryLayer.dll
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\obj\Debug\net10.0\refint\QuantityMeasurementApp.RepositoryLayer.dll
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\obj\Debug\net10.0\QuantityMeasurementApp.RepositoryLayer.pdb
+D:\QuantityMeasurementApp\QuantityMeasurementApp.RepositoryLayer\obj\Debug\net10.0\ref\QuantityMeasurementApp.RepositoryLayer.dll

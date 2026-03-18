@@ -10,6 +10,8 @@
         "dependencies": {
           "MSTest": "4.0.1",
           "QuantityMeasurementApp": "1.0.0",
+          "QuantityMeasurementApp.BussinessLayer": "1.0.0",
+          "QuantityMeasurementApp.Model": "1.0.0",
           "MSTest.TestFramework.Extensions": "4.0.1.0"
         },
         "runtime": {
@@ -1006,6 +1008,37 @@
           }
         }
       },
+      "QuantityMeasurementApp.BussinessLayer/1.0.0": {
+        "dependencies": {
+          "QuantityMeasurementApp.Model": "1.0.0",
+          "QuantityMeasurementApp.RepositoryLayer": "1.0.0"
+        },
+        "runtime": {
+          "QuantityMeasurementApp.BussinessLayer.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "QuantityMeasurementApp.Model/1.0.0": {
+        "runtime": {
+          "QuantityMeasurementApp.Model.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "QuantityMeasurementApp.RepositoryLayer/1.0.0": {
+        "dependencies": {
+          "QuantityMeasurementApp.Model": "1.0.0"
+        },
+        "runtime": {
+          "QuantityMeasurementApp.RepositoryLayer.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
       "MSTest.TestFramework.Extensions/4.0.1.0": {
         "runtime": {
           "MSTest.TestFramework.Extensions.dll": {
@@ -1149,6 +1182,21 @@
       "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
     },
     "QuantityMeasurementApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "QuantityMeasurementApp.BussinessLayer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "QuantityMeasurementApp.Model/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "QuantityMeasurementApp.RepositoryLayer/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
