@@ -1,4 +1,4 @@
-namespace QuantityMeasurementApp.Model;
+namespace QuantityMeasurementApp.BusinessLayer.Interfaces;
     public interface IMeasurable
     {
         double GetConversionFactor();

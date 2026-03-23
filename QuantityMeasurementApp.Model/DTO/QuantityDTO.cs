@@ -1,3 +1,4 @@
+
 namespace QuantityMeasurementApp.Model.DTO;
 
 public class QuantityDTO

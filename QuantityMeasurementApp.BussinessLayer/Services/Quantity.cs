@@ -1,5 +1,6 @@
 using QuantityMeasurementApp.Model.Enums;
-namespace QuantityMeasurementApp.BusinessLayer;
+
+namespace QuantityMeasurementApp.BusinessLayer.Services;
 
 public class Quantity<U> where U : struct
 {
@@ -14,39 +15,6 @@ public class Quantity<U> where U : struct
 
         this.value = value;
         this.unit = unit;
-    }
-
-    public static double Convert(double value, U fromUnit, U toUnit)
-    {
-        if (fromUnit is VolumeUnit from && toUnit is VolumeUnit to)
-        {
-            return ConvertVolume(value, from, to);
-        }
-        if (fromUnit is LengthUnit fromLength && toUnit is LengthUnit toLength)
-        {
-            double baseValue = fromLength.ConvertToBaseUnit(value);
-            return toLength.ConvertFromBaseUnit(baseValue);
-        }
-        if (fromUnit is WeightUnit fromWeight && toUnit is WeightUnit toWeight)
-        {
-            double baseValue = fromWeight.ConvertToBaseUnit(value);
-            return toWeight.ConvertFromBaseUnit(baseValue);
-        }
-        if (fromUnit is TemperatureUnit fromTemp && toUnit is TemperatureUnit toTemp)
-        {
-            double baseValue = fromTemp.ConvertToBaseUnit(value);
-            return toTemp.ConvertFromBaseUnit(baseValue);
-        }
-        
-        throw new ArgumentException("Unsupported unit conversion");
-    }
-
-    private static double ConvertVolume(double value, VolumeUnit from, VolumeUnit to)
-    {
-        // Convert to base unit (litres) first
-        double baseValue = value * from.ToBaseUnit();
-        // Convert from base unit to target unit
-        return baseValue / to.ToBaseUnit();
     }
 
     public override bool Equals(object? obj)
@@ -105,6 +73,38 @@ public class Quantity<U> where U : struct
         return new Quantity<U>(converted, targetUnit);
     }
 
+    // Static conversion method for tests
+    public static double Convert(double value, U fromUnit, U toUnit)
+    {
+        if (double.IsNaN(value) || double.IsInfinity(value))
+            throw new ArgumentException("Invalid value");
+
+        // Convert to base unit first
+        double baseValue;
+        if (fromUnit is LengthUnit l1)
+            baseValue = l1.ConvertToBaseUnit(value);
+        else if (fromUnit is WeightUnit w1)
+            baseValue = w1.ConvertToBaseUnit(value);
+        else if (fromUnit is VolumeUnit v1)
+            baseValue = v1.ConvertToBaseUnit(value);
+        else if (fromUnit is TemperatureUnit t1)
+            baseValue = t1.ConvertToBaseUnit(value);
+        else
+            throw new ArgumentException("Unsupported unit type");
+
+        // Convert from base unit to target unit
+        if (toUnit is LengthUnit l2)
+            return l2.ConvertFromBaseUnit(baseValue);
+        else if (toUnit is WeightUnit w2)
+            return w2.ConvertFromBaseUnit(baseValue);
+        else if (toUnit is VolumeUnit v2)
+            return v2.ConvertFromBaseUnit(baseValue);
+        else if (toUnit is TemperatureUnit t2)
+            return t2.ConvertFromBaseUnit(baseValue);
+        else
+            throw new ArgumentException("Unsupported unit type");
+    }
+
     public Quantity<U> Add(Quantity<U> other, U targetUnit)
     {
         if (other == null)
@@ -117,6 +117,7 @@ public class Quantity<U> where U : struct
 
         double sum = base1 + base2;
 
+        // Convert from base unit to target unit
         double result;
         if (targetUnit is LengthUnit l)
             result = l.ConvertFromBaseUnit(sum);
@@ -144,6 +145,7 @@ public class Quantity<U> where U : struct
 
         double baseResult = baseValue1 - baseValue2;
 
+        // Convert from base unit to target unit
         double result;
         if (this.unit is LengthUnit l)
             result = l.ConvertFromBaseUnit(baseResult);
@@ -174,6 +176,7 @@ public class Quantity<U> where U : struct
 
         double baseResult = baseValue1 - baseValue2;
 
+        // Convert from base unit to target unit
         double result;
         if (targetUnit is LengthUnit l)
             result = l.ConvertFromBaseUnit(baseResult);

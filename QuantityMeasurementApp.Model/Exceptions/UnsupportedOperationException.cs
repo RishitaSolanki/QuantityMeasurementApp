@@ -1,3 +1,5 @@
+using System;
+
 namespace QuantityMeasurementApp.Model.Exceptions;
     public class UnsupportedOperationException : Exception
     {

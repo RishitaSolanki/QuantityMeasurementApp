@@ -1,14 +1,16 @@
-﻿﻿using Microsoft.Extensions.DependencyInjection;
-using QuantityMeasurementApp.BusinessLayer.Interfaces;
-using QuantityMeasurementRepositoryLayer.Interfaces;
-using QuantityMeasurementRepositoryLayer.Repositories;
-using QuantityMeasurementApp.Console.Interfaces;
+﻿﻿﻿using Microsoft.Extensions.Configuration;
+using IMenu = QuantityMeasurementApp.Console.Interfaces.IMenu;
+using Menu = QuantityMeasurementApp.Console.Services.Menu;
 
 class Program
 {
     static void Main()
     {
-        IMenu menu = new Menu();
+        IConfiguration config = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+        IMenu menu = new Menu(config);
         menu.Start();
     }
-}
+} 

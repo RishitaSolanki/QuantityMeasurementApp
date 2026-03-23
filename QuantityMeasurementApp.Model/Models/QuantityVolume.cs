@@ -1,5 +1,7 @@
 using System;
 using QuantityMeasurementApp.Model.Enums;
+using QuantityMeasurementApp.Model.Models;
+
 namespace QuantityMeasurementApp.Model;
 
 public class QuantityVolume
@@ -13,9 +15,7 @@ public class QuantityVolume
         Unit = unit;
     }
 
-    public override int GetHashCode() => ConvertTo(VolumeUnit.LITRE).Value.GetHashCode();
-
-    public override bool Equals(object? obj)
+    public override bool Equals(object obj)
     {
         if (obj == null || !(obj is QuantityVolume))
             return false;

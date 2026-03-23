@@ -2,7 +2,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuantityMeasurementApp.Model;
 using QuantityMeasurementApp.Model.Enums;
 using QuantityMeasurementApp.Model.Exceptions;
-using QuantityMeasurementApp.BusinessLayer;
+using QuantityMeasurementApp.Model.Models;
+using QuantityMeasurementApp.BusinessLayer.Services;
 using System;
 
 namespace QuantityMeasurementApp.Tests
@@ -130,7 +131,7 @@ namespace QuantityMeasurementApp.Tests
             }
             catch (UnsupportedOperationException ex)
             {
-                Assert.Contains("Temperature does not support", ex.Message);
+                Assert.IsTrue(ex.Message.Contains("Temperature does not support"));
             }
         }
 
@@ -146,7 +147,7 @@ namespace QuantityMeasurementApp.Tests
             }
             catch (UnsupportedOperationException ex)
             {
-                Assert.Contains("Temperature does not support", ex.Message);
+                Assert.IsTrue(ex.Message.Contains("Temperature does not support"));
             }
         }
 
@@ -162,7 +163,7 @@ namespace QuantityMeasurementApp.Tests
             }
             catch (UnsupportedOperationException ex)
             {
-                Assert.Contains("Temperature does not support", ex.Message);
+                Assert.IsTrue(ex.Message.Contains("Temperature does not support"));
             }
         }
 
