@@ -1,10 +1,11 @@
 using QuantityMeasurementApp.BusinessLayer.Interfaces;
 using QuantityMeasurementApp.Model.DTO;
-using QuantityMeasurementApp.RepositoryLayer.Interfaces;
-using QuantityMeasurementApp.Model.Entities;
+using QuantityMeasurementRepositoryLayer.Interfaces;
+using QuantityMeasurementModelLayer.Entities;
 using QuantityMeasurementApp.Model.Enums;
+using QuantityMeasurementApp.Model.Extensions;
 
-namespace QuantityMeasurementApp.BusinessLayer.Services;
+namespace QuantityMeasurementBusinessLayer.Services;
 
 public class QuantityMeasurementServiceImpl : IQuantityMeasurementService
 {
@@ -45,7 +46,17 @@ public class QuantityMeasurementServiceImpl : IQuantityMeasurementService
     // 🔹 Helper method to store operations
     private void SaveOperation(double v1, string u1, double v2, string u2, string operation, double result)
     {
-        repository.Save(new QuantityMeasurementEntity(v1, u1, v2, u2, operation, result, string.Empty));
+        QuantityMeasurementEntity entity = new QuantityMeasurementEntity(
+            v1,
+            u1,
+            v2,
+            u2,
+            operation,
+            result,
+            "Measurement"
+        );
+
+        repository.Save(entity);
     }
 
     public bool Compare(QuantityDTO q1, QuantityDTO q2)

@@ -3,19 +3,19 @@ using static System.Console;
 using QuantityMeasurementApp.BusinessLayer.Interfaces;
 using QuantityMeasurementApp.BusinessLayer.Services;
 using QuantityMeasurementApp.Model.DTO;
-using QuantityMeasurementApp.RepositoryLayer.Interfaces;
-using QuantityMeasurementApp.RepositoryLayer.Repositories;
-using QuantityMeasurementApp.RepositoryLayer.Services;
+using QuantityMeasurementRepositoryLayer.Interfaces;
+using QuantityMeasurementRepositoryLayer.Repositories;
+using QuantityMeasurementRepositoryLayer.Services;
+using QuantityMeasurementConsoleApp.Interfaces;
 using Microsoft.Extensions.Configuration;
 
-namespace QuantityMeasurementApp.Console.Services;
+namespace QuantityMeasurementapp.Console.Services;
 
-public class Menu : global::QuantityMeasurementApp.Console.Interfaces.IMenu
+public class Menu : IMenu
 {
     private readonly IConfiguration config;
     private IQuantityMeasurementService? service;
     private IQuantityMeasurementRepository? repository;
-    private IQuantityMeasurementRepository? databaseRepository;
     private DataSyncService? syncService;
     private bool isUsingCache;
 
@@ -27,7 +27,7 @@ public class Menu : global::QuantityMeasurementApp.Console.Interfaces.IMenu
     public void Start()
     {
         SelectStorage();
-        
+
         while (true)
         {
             try
@@ -62,95 +62,30 @@ public class Menu : global::QuantityMeasurementApp.Console.Interfaces.IMenu
 
     private void SelectStorage()
     {
-        WriteLine("\n=== Checking Database Connectivity ===");
-        
-        bool isDatabaseAvailable = CheckDatabaseConnectivity();
-        
-        if (!isDatabaseAvailable)
-        {
-            WriteLine("❌ Database is not available. Using Cache Memory until database becomes active.");
-            repository = new QuantityMeasurementCacheRepository();
-            isUsingCache = true;
-            service = new QuantityMeasurementServiceImpl(repository);
-            return;
-        }
-        
-        WriteLine("✅ Database is available!");
-        CheckAndUploadPendingJsonData();
-        
         WriteLine("\n=== Storage Selection ===");
-        WriteLine("Choose your preferred storage method:");
-        WriteLine();
-        WriteLine("1. Cache Memory (Fast, In-Memory Storage with JSON Persistence)");
-        WriteLine();
-        WriteLine("2. Database (Persistent SQL Server Storage)");
-        WriteLine();
-        
+        WriteLine("1. Cache Memory");
+        WriteLine("2. Database");
+
         while (true)
         {
             Write("Enter your choice (1 for Cache, 2 for Database): ");
-            string input = ReadLine() ?? string.Empty;
-            input = input.Trim();
-            
+            string input = (ReadLine() ?? string.Empty).Trim();
+
             switch (input)
             {
                 case "1":
-                    WriteLine("\n✓ Cache Memory selected - Using in-memory storage with JSON persistence");
-                    repository = new QuantityMeasurementCacheRepository();
+                    WriteLine("\n✓ Cache Memory selected");
                     isUsingCache = true;
                     break;
-                    
                 case "2":
-                    WriteLine("\n✓ Database selected - Using SQL Server persistent storage");
-                    repository = new QuantityMeasurementDatabaseRepository(config);
+                    WriteLine("\n✓ Database selected");
                     isUsingCache = false;
                     break;
-                    
                 default:
                     WriteLine("Invalid choice. Please enter 1 or 2.");
                     continue;
             }
-
-            service = new QuantityMeasurementServiceImpl(repository);
-            
-            if (isUsingCache)
-            {
-                if (databaseRepository is null)
-                {
-                    databaseRepository = new QuantityMeasurementDatabaseRepository(config);
-                }
-                syncService = new DataSyncService((ICacheRepository)repository, databaseRepository);
-            }
-            
             break;
-        }
-    }
-
-    private void CheckAndUploadPendingJsonData()
-    {
-        try
-        {
-            var tempCacheRepo = new QuantityMeasurementCacheRepository();
-            
-            if (tempCacheRepo.HasPendingData())
-            {
-                WriteLine("\n📝 Found pending data in JSON file from previous session.");
-                if (databaseRepository is null)
-                {
-                    databaseRepository = new QuantityMeasurementDatabaseRepository(config);
-                }
-                var tempSyncService = new DataSyncService(tempCacheRepo, databaseRepository);
-                bool success = tempSyncService.UploadPendingDataToDatabase(silent: false);
-                
-                if (success)
-                    WriteLine("✅ Pending data uploaded to database!\n");
-                else
-                    WriteLine("⚠️ Failed to upload pending data. Data remains in JSON file.\n");
-            }
-        }
-        catch (Exception ex)
-        {
-            WriteLine($"⚠️ Error checking pending data: {ex.Message}\n");
         }
     }
 
@@ -158,16 +93,10 @@ public class Menu : global::QuantityMeasurementApp.Console.Interfaces.IMenu
     {
         try
         {
-            WriteLine("Testing database connection...");
-            if (databaseRepository is null)
-            {
-                databaseRepository = new QuantityMeasurementDatabaseRepository(config);
-            }
-            return databaseRepository.TestConnection();
+            return repository?.TestConnection() ?? false;
         }
-        catch (Exception ex)
+        catch
         {
-            WriteLine($"Database connectivity check failed: {ex.Message}");
             return false;
         }
     }
@@ -197,16 +126,16 @@ public class Menu : global::QuantityMeasurementApp.Console.Interfaces.IMenu
         switch (operation)
         {
             case 1:
-                if (service != null) { PrintResult(service.Add(firstValue, secondValue)); AutoUploadToDatabase(); }
+                if (service != null) { PrintResult(service.Add(firstValue, secondValue)); }
                 break;
             case 2:
-                if (service != null) { PrintResult(service.Subtract(firstValue, secondValue)); AutoUploadToDatabase(); }
+                if (service != null) { PrintResult(service.Subtract(firstValue, secondValue)); }
                 break;
             case 3:
-                if (service != null) { WriteLine("Result = " + service.Divide(firstValue, secondValue)); AutoUploadToDatabase(); }
+                if (service != null) { WriteLine("Result = " + service.Divide(firstValue, secondValue)); }
                 break;
             case 4:
-                if (service != null) { WriteLine("Are Equal = " + service.Compare(firstValue, secondValue)); AutoUploadToDatabase(); }
+                if (service != null) { WriteLine("Are Equal = " + service.Compare(firstValue, secondValue)); }
                 break;
             default:
                 WriteLine("Invalid Operation");
@@ -259,7 +188,6 @@ public class Menu : global::QuantityMeasurementApp.Console.Interfaces.IMenu
         if (service != null)
         {
             PrintResult(service.Convert(firstValue, targetUnit));
-            AutoUploadToDatabase();
         }
     }
 
@@ -279,24 +207,6 @@ public class Menu : global::QuantityMeasurementApp.Console.Interfaces.IMenu
                 WriteLine($"Id: {item.Id} | FirstValue: {item.FirstValue} {item.FirstUnit} | SecondValue: {item.SecondValue} {item.SecondUnit} | Operation: {item.Operation} | Result: {item.Result} | Type: {item.MeasurementType}");
             }
             WriteLine("==========================\n");
-        }
-    }
-
-    private void AutoUploadToDatabase()
-    {
-        if (!isUsingCache || syncService == null) return;
-        var cacheRepo = (ICacheRepository)repository!;
-        if (!cacheRepo.HasPendingData()) return;
-
-        try
-        {
-            if (!CheckDatabaseConnectivity()) { WriteLine("⚠️ Database not available"); return; }
-            bool success = syncService.UploadPendingDataToDatabase(silent: true);
-            if (success) WriteLine("✅ Data automatically uploaded to database");
-        }
-        catch (Exception ex)
-        {
-            WriteLine($"⚠️ Auto-upload failed: {ex.Message}");
         }
     }
 }

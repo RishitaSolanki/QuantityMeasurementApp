@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuantityMeasurementApp.Model;
 using QuantityMeasurementApp.Model.Enums;
-using QuantityMeasurementApp.Model.Models;
+using QuantityMeasurementModelLayer.Models;
 using QuantityMeasurementApp.BusinessLayer.Services;
 using System;
 
@@ -207,7 +207,7 @@ namespace QuantityMeasurementApp.Tests
             Quantity<VolumeUnit> v1 = new Quantity<VolumeUnit>(1.0, VolumeUnit.LITRE);
             try
             {
-                v1.Add(null!, VolumeUnit.LITRE);
+                v1.Add(null, VolumeUnit.LITRE);
                 Assert.Fail("Expected ArgumentException was not thrown.");
             }
             catch (ArgumentException)

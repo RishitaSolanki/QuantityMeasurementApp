@@ -2,24 +2,16 @@ using QuantityMeasurementApp.Model.Enums;
 
 public static class VolumeUnitExtensions
 {
-    public static double ToBaseUnit(this VolumeUnit unit)
-    {
-        switch (unit)
-        {
-            case VolumeUnit.LITRE:      return 1.0;
-            case VolumeUnit.MILLILITRE: return 0.001;
-            case VolumeUnit.GALLON:     return 3.78541;
-            default: throw new ArgumentException($"Unsupported VolumeUnit: {unit}");
-        }
-    }
+    // Base unit: LITRE
+    public static double ConvertToBaseUnit(this VolumeUnit unit, double value) => value * ToBaseUnit(unit);
 
-    public static double ConvertToBaseUnit(this VolumeUnit unit, double value)
-    {
-        return value * unit.ToBaseUnit();
-    }
+    public static double ConvertFromBaseUnit(this VolumeUnit unit, double baseValue) => baseValue / ToBaseUnit(unit);
 
-    public static double ConvertFromBaseUnit(this VolumeUnit unit, double baseValue)
+    public static double ToBaseUnit(this VolumeUnit unit) => unit switch
     {
-        return baseValue / unit.ToBaseUnit();
-    }
+        VolumeUnit.LITRE      => 1.0,
+        VolumeUnit.MILLILITRE => 0.001,
+        VolumeUnit.GALLON     => 3.78541,
+        _ => throw new ArgumentException($"Unsupported VolumeUnit: {unit}")
+    };
 }

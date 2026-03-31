@@ -1,6 +1,7 @@
-﻿﻿﻿using Microsoft.Extensions.Configuration;
-using IMenu = QuantityMeasurementApp.Console.Interfaces.IMenu;
-using Menu = QuantityMeasurementApp.Console.Services.Menu;
+﻿
+﻿using Microsoft.Extensions.Configuration;
+using QuantityMeasurementConsoleApp.Interfaces;
+using QuantityMeasurementapp.Console.Services;
 
 class Program
 {
@@ -14,3 +15,4 @@ class Program
         menu.Start();
     }
 } 
+              

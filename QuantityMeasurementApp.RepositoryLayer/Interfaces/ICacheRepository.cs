@@ -1,6 +1,6 @@
-using QuantityMeasurementApp.Model.Entities;
+using QuantityMeasurementModelLayer.Entities;
 
-namespace QuantityMeasurementApp.RepositoryLayer.Interfaces;
+namespace QuantityMeasurementRepositoryLayer.Interfaces;
 
 public interface ICacheRepository : IQuantityMeasurementRepository
 {

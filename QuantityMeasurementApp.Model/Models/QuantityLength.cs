@@ -1,6 +1,7 @@
 using System;
 using QuantityMeasurementApp.Model.Enums;
 using QuantityMeasurementApp.Model.Models;
+using QuantityMeasurementApp.Model.Extensions;
 
 namespace QuantityMeasurementApp.Model;
     public class QuantityLength
@@ -106,7 +107,7 @@ public static QuantityLength AddTwoUnits_TargetUnit(
             return new QuantityLength(convertedValue, targetUnit);
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj == null) return false;
             if (!(obj is QuantityLength)) return false;

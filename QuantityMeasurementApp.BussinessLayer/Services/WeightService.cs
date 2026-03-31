@@ -1,7 +1,8 @@
 using System;
 using QuantityMeasurementApp.Model.Enums;
+using QuantityMeasurementModelLayer.Models;
+using QuantityMeasurementModelLayer.Extensions;
 using QuantityMeasurementApp.Model.Models;
-using QuantityMeasurementApp.Model;
 
 namespace QuantityMeasurementApp.BusinessLayer.Services;
 

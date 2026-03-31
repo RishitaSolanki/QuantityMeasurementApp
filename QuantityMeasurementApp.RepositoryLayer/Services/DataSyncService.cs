@@ -1,7 +1,7 @@
-using QuantityMeasurementApp.RepositoryLayer.Interfaces;
-using QuantityMeasurementApp.Model.Entities;
+using QuantityMeasurementRepositoryLayer.Interfaces;
+using QuantityMeasurementModelLayer.Entities;
 
-namespace QuantityMeasurementApp.RepositoryLayer.Services;
+namespace QuantityMeasurementRepositoryLayer.Services;
 
 public class DataSyncService
 {
@@ -40,7 +40,7 @@ public class DataSyncService
             }
             return true;
         }
-        catch (Exception ex)
+        catch
         {
             if (!silent) Console.WriteLine($"Error uploading data to database");
             // DO NOT clear cache on failure - data remains in JSON file
