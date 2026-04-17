@@ -40,7 +40,7 @@ services:
   webapi:
     build:
       context: .
-      dockerfile: QuantityMeasurementApp.WebApi/Dockerfile
+      dockerfile: Dockerfile
     container_name: quantitymeasurement-webapi
     ports:
       - "5000:80"

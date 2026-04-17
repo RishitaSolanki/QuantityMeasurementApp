@@ -33,7 +33,7 @@ services:
   - type: web
     name: quantitymeasurement-api
     env: docker
-    dockerfilePath: ./QuantityMeasurementApp.WebApi/Dockerfile
+    dockerfilePath: ./Dockerfile
     dockerContext: .
     plan: free
     healthCheckPath: /health
