@@ -55,12 +55,15 @@ public class UserService : IUserService
     {
         try
         {
+            _logger.LogInformation("Creating user for email: {Email}", request.Email);
+            
             // Check if user already exists
             var existingUser = await _context.Users
                 .FirstOrDefaultAsync(u => u.Email.ToLower() == request.Email.ToLower());
 
             if (existingUser != null)
             {
+                _logger.LogInformation("Found existing user with ID: {UserId} for email: {Email}", existingUser.Id, existingUser.Email);
                 // Update existing user instead of rejecting
                 existingUser.PasswordHash = _securityService.HashPassword(request.Password);
                 existingUser.FirstName = request.FirstName;
@@ -72,6 +75,8 @@ public class UserService : IUserService
                 return existingUser;
             }
 
+            _logger.LogInformation("No existing user found, creating new user for email: {Email}", request.Email);
+            
             // Hash password
             var passwordHash = _securityService.HashPassword(request.Password);
 
