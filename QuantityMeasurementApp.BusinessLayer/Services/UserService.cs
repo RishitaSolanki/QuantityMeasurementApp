@@ -55,27 +55,20 @@ public class UserService : IUserService
     {
         try
         {
-            // Check if user already exists with a valid password hash
+            // Check if user already exists
             var existingUser = await _context.Users
                 .FirstOrDefaultAsync(u => u.Email.ToLower() == request.Email.ToLower());
 
             if (existingUser != null)
             {
-                // If user exists with a valid password hash, reject registration
-                if (!string.IsNullOrEmpty(existingUser.PasswordHash))
-                {
-                    _logger.LogWarning("User creation failed - email already exists: {Email}", request.Email);
-                    return null;
-                }
-
-                // User exists but has no password (broken record) - update it
+                // Update existing user instead of rejecting
                 existingUser.PasswordHash = _securityService.HashPassword(request.Password);
                 existingUser.FirstName = request.FirstName;
                 existingUser.LastName = request.LastName;
                 existingUser.IsActive = true;
                 existingUser.UpdatedAt = DateTime.UtcNow;
                 await _context.SaveChangesAsync();
-                _logger.LogInformation("Fixed broken user {UserId} for email {Email}", existingUser.Id, existingUser.Email);
+                _logger.LogInformation("Updated existing user {UserId} for email {Email}", existingUser.Id, existingUser.Email);
                 return existingUser;
             }
 
