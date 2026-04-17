@@ -38,11 +38,21 @@ builder.Services.AddDbContext<QuantityMeasurementDbContext>(options =>
 
 // Configure Redis Cache
 var redisConnectionString = builder.Configuration.GetConnectionString("Redis") ?? "localhost:6379";
-builder.Services.AddStackExchangeRedisCache(options =>
+try
 {
-    options.Configuration = redisConnectionString;
-    options.InstanceName = "QuantityMeasurement_";
-});
+    builder.Services.AddStackExchangeRedisCache(options =>
+    {
+        options.Configuration = redisConnectionString;
+        options.InstanceName = "QuantityMeasurement_";
+    });
+    Console.WriteLine("Redis cache configured successfully.");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Warning: Failed to configure Redis cache: {ex.Message}. Application will continue without caching.");
+    // Add a fallback distributed cache (in-memory) if Redis fails
+    builder.Services.AddDistributedMemoryCache();
+}
 
 // Register repositories
 builder.Services.AddScoped<QuantityMeasurementRepositoryLayer.Interfaces.IQuantityMeasurementRepository, QuantityMeasurementRepositoryLayer.Repositories.QuantityMeasurementRepository>();

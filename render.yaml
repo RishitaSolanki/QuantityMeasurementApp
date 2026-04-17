@@ -15,7 +15,7 @@ services:
       - key: ConnectionStrings__DefaultConnection
         value: postgresql://quantity_measurement_db_zl98_user:uDtWauL3ZY25yRk3GxXTE4cFXQJ1dRE2@dpg-d7gsescvikkc7380mlog-a/quantity_measurement_db_zl98
       - key: ConnectionStrings__Redis
-        value: equipped-kite-73194.upstash.io:6379,password=gQAAAAAAAR3qAAIncDI2YzZiMjkzODliYzU0NGUzYjFiYTY2MTVjN2NmMDRhNnAyNzMxOTQ,ssl=True,abortConnect=False
+        value: redis://default:gQAAAAAAAR3qAAIncDI2YzZiMjkzODliYzU0NGUzYjFiYTY2MTVjN2NmMDRhNnAyNzMxOTQ@equipped-kite-73194.upstash.io:6379
       - key: JwtSettings__Key
         value: ThisIsASecretKeyForJWTTokenGeneration123!@#
       - key: JwtSettings__Issuer
