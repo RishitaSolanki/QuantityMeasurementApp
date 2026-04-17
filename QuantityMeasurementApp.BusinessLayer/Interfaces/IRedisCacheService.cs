@@ -1,4 +1,4 @@
-namespace QuantityMeasurementBusinessLayer.Services;
+namespace QuantityMeasurementApp.BusinessLayer.Services;
 
 public interface IRedisCacheService
 {

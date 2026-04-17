@@ -2,7 +2,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
-namespace QuantityMeasurementBusinessLayer.Services;
+namespace QuantityMeasurementApp.BusinessLayer.Services;
 
 public class RedisCacheService : IRedisCacheService
 {

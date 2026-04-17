@@ -6,7 +6,7 @@ services:
     container_name: quantitymeasurement-sqlserver
     environment:
       - ACCEPT_EULA=Y
-      - SA_PASSWORD=Glauniversity@123
+      - SA_PASSWORD=<Glauniversity@123
       - MSSQL_PID=Express
     ports:
       - "1434:1433"
@@ -36,6 +36,33 @@ services:
       timeout: 10s
       retries: 5
       start_period: 10s
+
+  webapi:
+    build:
+      context: .
+      dockerfile: QuantityMeasurementApp.WebApi/Dockerfile
+    container_name: quantitymeasurement-webapi
+    ports:
+      - "5000:80"
+      - "5001:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=QuantityMeasurementDb;User Id=sa;Password=Glauniversity@123;TrustServerCertificate=true;MultipleActiveResultSets=true
+      - ConnectionStrings__Redis=redis:6379
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - quantitymeasurement-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
 
 volumes:
   sqlserver_data:

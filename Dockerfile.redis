@@ -1,0 +1,17 @@
+FROM redis:7-alpine
+
+# Set Redis password if provided
+ENV REDIS_PASSWORD=$REDIS_PASSWORD
+
+# Create redis config file
+RUN echo "requirepass $REDIS_PASSWORD" > /usr/local/etc/redis/redis.conf
+
+# Expose port
+EXPOSE 6379
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=10s --retries=5 \
+    CMD redis-cli -a $REDIS_PASSWORD ping
+
+# Start Redis with config
+CMD ["redis-server", "/usr/local/etc/redis/redis.conf"]

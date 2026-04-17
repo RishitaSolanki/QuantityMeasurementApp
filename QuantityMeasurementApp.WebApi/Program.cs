@@ -47,7 +47,7 @@ builder.Services.AddStackExchangeRedisCache(options =>
 builder.Services.AddScoped<QuantityMeasurementRepositoryLayer.Interfaces.IQuantityMeasurementRepository, QuantityMeasurementRepositoryLayer.Repositories.QuantityMeasurementRepository>();
 
 // Register services
-builder.Services.AddScoped<QuantityMeasurementBusinessLayer.Services.IRedisCacheService, QuantityMeasurementBusinessLayer.Services.RedisCacheService>();
+builder.Services.AddScoped<QuantityMeasurementApp.BusinessLayer.Services.IRedisCacheService, QuantityMeasurementApp.BusinessLayer.Services.RedisCacheService>();
 
 // Register business layer services
 builder.Services.AddScoped<IQuantityMeasurementService, QuantityMeasurementServiceImpl>();
