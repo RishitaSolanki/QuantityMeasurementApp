@@ -30,11 +30,11 @@ builder.Services.AddSwaggerGen(c =>
     }
 });
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") // Configure Entity Framework with SQL Server (Docker)
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") // Configure Entity Framework with PostgreSQL
     ?? "Server=localhost,1434;Database=QuantityMeasurementDb;User Id=sa;Password=Glauniversity@123;TrustServerCertificate=true;MultipleActiveResultSets=true";
 
 builder.Services.AddDbContext<QuantityMeasurementDbContext>(options =>
-    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("QuantityMeasurementWebApi")));
+    options.UseNpgsql(connectionString, b => b.MigrationsAssembly("QuantityMeasurementWebApi")));
 
 // Configure Redis Cache
 var redisConnectionString = builder.Configuration.GetConnectionString("Redis") ?? "localhost:6379";

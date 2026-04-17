@@ -1,22 +1,4 @@
 services:
-  # SQL Server Database Service
-  - type: pserv
-    name: quantitymeasurement-sqlserver
-    env: docker
-    dockerfilePath: ./Dockerfile.sqlserver
-    dockerContext: .
-    plan: free
-    envVars:
-      - key: ACCEPT_EULA
-        value: Y
-      - key: SA_PASSWORD
-        generateValue: true
-      - key: MSSQL_PID
-        value: Express
-    disk:
-      name: sqlserver-data
-      mountPath: /var/opt/mssql
-      sizeGB: 10
 
   # Redis Cache Service
   - type: pserv
@@ -43,20 +25,10 @@ services:
       - key: ASPNETCORE_URLS
         value: http://+:80
       - key: ConnectionStrings__DefaultConnection
-        fromService:
-          name: quantitymeasurement-sqlserver
-          type: pserv
-          property: connectionString
+        value: postgresql://quantity_measurement_db_zl98_user:uDtWauL3ZY25yRk3GxXTE4cFXQJ1dRE2@dpg-d7gsescvikkc7380mlog-a/quantity_measurement_db_zl98
       - key: ConnectionStrings__Redis
         value: redis:${quantitymeasurement-redis.internalHost}:6379,password=${quantitymeasurement-redis.env.REDIS_PASSWORD}
       - key: JwtSettings__Key
         generateValue: true
       - key: EncryptionSettings__Key
         generateValue: true
-
-databases:
-  # Alternative: Use Render's managed PostgreSQL instead of SQL Server
-  # Uncomment this section if you prefer to use PostgreSQL
-  # - name: quantitymeasurement-db
-  #   databaseName: quantitymeasurementdb
-  #   user: quantitymeasurement_user
