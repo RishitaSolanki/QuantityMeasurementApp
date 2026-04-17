@@ -36,10 +36,12 @@ public class AuthController : ControllerBase
                 return BadRequest(new { error = "Invalid registration data", details = ModelState });
             }
 
+            _logger.LogInformation("Attempting to register user with email: {Email}", request.Email);
             var user = await _userService.CreateUserAsync(request);
             
             if (user == null)
             {
+                _logger.LogWarning("User creation returned null for email: {Email}", request.Email);
                 return Conflict(new { error = "User with this email already exists" });
             }
 
