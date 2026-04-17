@@ -48,10 +48,7 @@ services:
           type: pserv
           property: connectionString
       - key: ConnectionStrings__Redis
-        fromService:
-          name: quantitymeasurement-redis
-          type: pserv
-          property: connectionString
+        value: redis:${quantitymeasurement-redis.internalHost}:6379,password=${quantitymeasurement-redis.env.REDIS_PASSWORD}
       - key: JwtSettings__Key
         generateValue: true
       - key: EncryptionSettings__Key

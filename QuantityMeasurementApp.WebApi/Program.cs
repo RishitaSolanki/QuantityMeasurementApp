@@ -65,14 +65,15 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Add basic health checks
+// Add comprehensive health checks
 builder.Services.AddHealthChecks()
-    .AddRedis(redisConnectionString);
+    .AddRedis(redisConnectionString, name: "redis")
+    .AddCheck("self", () => HealthCheckResult.Healthy("API is running"));
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c =>
