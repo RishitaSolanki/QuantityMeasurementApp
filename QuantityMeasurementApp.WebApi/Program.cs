@@ -41,7 +41,8 @@ if (string.IsNullOrEmpty(connectionString))
 }
 
 builder.Services.AddDbContext<QuantityMeasurementDbContext>(options =>
-    options.UseNpgsql(connectionString, b => b.MigrationsAssembly("QuantityMeasurementWebApi")));
+    options.UseNpgsql(connectionString, b => b.MigrationsAssembly("QuantityMeasurementRepositoryLayer")));
+
 
 // Configure Redis Cache
 var redisConnectionString = builder.Configuration.GetConnectionString("Redis") ?? "localhost:6379";

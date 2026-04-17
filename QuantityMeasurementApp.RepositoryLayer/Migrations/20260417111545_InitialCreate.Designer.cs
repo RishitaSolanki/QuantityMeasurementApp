@@ -2,18 +2,21 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using QuantityMeasurementRepositoryLayer.Context;
 
 #nullable disable
 
-namespace QuantityMeasurementWebApi.Migrations
+namespace QuantityMeasurementRepositoryLayer.Migrations
 {
     [DbContext(typeof(QuantityMeasurementDbContext))]
-    partial class QuantityMeasurementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260417111545_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

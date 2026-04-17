@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace QuantityMeasurementWebApi.Migrations
+namespace QuantityMeasurementRepositoryLayer.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
