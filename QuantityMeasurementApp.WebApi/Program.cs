@@ -68,7 +68,6 @@ builder.Services.AddCors(options =>
 
 // Add comprehensive health checks
 builder.Services.AddHealthChecks()
-    .AddRedis(redisConnectionString, name: "redis")
     .AddCheck("self", () => HealthCheckResult.Healthy("API is running"));
 
 var app = builder.Build();
