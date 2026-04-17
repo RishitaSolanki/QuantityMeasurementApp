@@ -36,6 +36,8 @@ services:
       timeout: 10s
       retries: 5
       start_period: 10s
+    # Comment out this service if using Upstash Redis instead
+    # Set ConnectionStrings__Redis environment variable to Upstash connection string
 
   webapi:
     build:
@@ -49,11 +51,9 @@ services:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:80
       - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=QuantityMeasurementDb;User Id=sa;Password=Glauniversity@123;TrustServerCertificate=true;MultipleActiveResultSets=true
-      - ConnectionStrings__Redis=redis:6379
+      - ConnectionStrings__Redis=redis://default:gQAAAAAAAR3qAAIncDI2YzZiMjkzODliYzU0NGUzYjFiYTY2MTVjN2NmMDRhNnAyNzMxOTQ@equipped-kite-73194.upstash.io:6379
     depends_on:
       sqlserver:
-        condition: service_healthy
-      redis:
         condition: service_healthy
     networks:
       - quantitymeasurement-network

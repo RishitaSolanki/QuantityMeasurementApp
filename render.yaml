@@ -1,16 +1,4 @@
 services:
-
-  # Redis Cache Service
-  - type: pserv
-    name: quantitymeasurement-redis
-    env: docker
-    dockerfilePath: ./Dockerfile.redis
-    dockerContext: .
-    plan: free
-    envVars:
-      - key: REDIS_PASSWORD
-        generateValue: true
-
   # Web API Service
   - type: web
     name: quantitymeasurement-api
@@ -27,7 +15,7 @@ services:
       - key: ConnectionStrings__DefaultConnection
         value: postgresql://quantity_measurement_db_zl98_user:uDtWauL3ZY25yRk3GxXTE4cFXQJ1dRE2@dpg-d7gsescvikkc7380mlog-a/quantity_measurement_db_zl98
       - key: ConnectionStrings__Redis
-        value: redis:${quantitymeasurement-redis.internalHost}:6379,password=${quantitymeasurement-redis.env.REDIS_PASSWORD}
+        value: redis://default:gQAAAAAAAR3qAAIncDI2YzZiMjkzODliYzU0NGUzYjFiYTY2MTVjN2NmMDRhNnAyNzMxOTQ@equipped-kite-73194.upstash.io:6379
       - key: JwtSettings__Key
         generateValue: true
       - key: EncryptionSettings__Key
