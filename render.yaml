@@ -17,6 +17,12 @@ services:
       - key: ConnectionStrings__Redis
         value: redis://default:gQAAAAAAAR3qAAIncDI2YzZiMjkzODliYzU0NGUzYjFiYTY2MTVjN2NmMDRhNnAyNzMxOTQ@equipped-kite-73194.upstash.io:6379
       - key: JwtSettings__Key
-        generateValue: true
+        value: ThisIsASecretKeyForJWTTokenGeneration123!@#
+      - key: JwtSettings__Issuer
+        value: QuantityMeasurementAPI
+      - key: JwtSettings__Audience
+        value: QuantityMeasurementUsers
+      - key: JwtSettings__ExpirationMinutes
+        value: 60
       - key: EncryptionSettings__Key
-        generateValue: true
+        value: ThisIsSecret32ByteKeyForEncrypt!
