@@ -12,7 +12,7 @@ using QuantityMeasurementRepositoryLayer.Context;
 namespace QuantityMeasurementWebApi.Migrations
 {
     [DbContext(typeof(QuantityMeasurementDbContext))]
-    [Migration("20260417101621_InitialCreate")]
+    [Migration("20260417105407_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
