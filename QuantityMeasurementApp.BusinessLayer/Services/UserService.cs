@@ -97,6 +97,12 @@ public class UserService : IUserService
             _logger.LogInformation("Created new user {UserId} for email {Email}", newUser.Id, newUser.Email);
             return newUser;
         }
+        catch (DbUpdateException dbEx)
+        {
+            _logger.LogError(dbEx, "Database error creating user for email {Email}", request.Email);
+            _logger.LogError(dbEx, "Database error details: {Message}", dbEx.InnerException?.Message ?? dbEx.Message);
+            return null;
+        }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error creating user for email {Email}", request.Email);

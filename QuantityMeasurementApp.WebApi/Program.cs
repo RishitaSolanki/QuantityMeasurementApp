@@ -33,6 +33,13 @@ builder.Services.AddSwaggerGen(c =>
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") // Configure Entity Framework with PostgreSQL
     ?? "Server=localhost,1434;Database=QuantityMeasurementDb;User Id=sa;Password=Glauniversity@123;TrustServerCertificate=true;MultipleActiveResultSets=true";
 
+Console.WriteLine($"Connection string: {connectionString}");
+
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new InvalidOperationException("Connection string is null or empty");
+}
+
 builder.Services.AddDbContext<QuantityMeasurementDbContext>(options =>
     options.UseNpgsql(connectionString, b => b.MigrationsAssembly("QuantityMeasurementWebApi")));
 
