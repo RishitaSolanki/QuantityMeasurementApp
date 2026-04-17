@@ -1,0 +1,36 @@
+# Build stage
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+
+# Runtime stage
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
+
+# Ignore files
+.git
+.gitignore
+*.md
+
+# Ignore build artifacts
+**/bin/
+**/obj/
+**/out/
+
+# Ignore IDE files
+.vs/
+.vscode/
+*.user
+*.suo
+*.userprefs
+
+# Ignore test files
+**/Tests/
+**/*.Tests/
+**/*Test*/
+
+# Ignore Docker files
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# Ignore other
+*.log
+*.tmp
