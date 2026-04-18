@@ -19,12 +19,12 @@ namespace QuantityMeasurementRepositoryLayer.Repository
         
             public void SaveOperation(QuantityMeasurementEntity entity)
 {
-    _context.QuantityMeasurements.Add(entity);
+    _context.QuantityMeasurement.Add(entity);
     _context.SaveChanges(); // let it throw exception
 }
         public List<QuantityMeasurementEntity> GetAll()
         {
-            return _context.QuantityMeasurements.ToList();
+            return _context.QuantityMeasurement.ToList();
         }
     }
 }

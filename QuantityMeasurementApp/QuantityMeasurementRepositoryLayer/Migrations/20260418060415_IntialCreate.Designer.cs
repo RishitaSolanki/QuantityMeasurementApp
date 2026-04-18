@@ -11,15 +11,15 @@ using QuantityMeasurementRepositoryLayer.Context;
 namespace QuantityMeasurementRepositoryLayer.Migrations
 {
     [DbContext(typeof(QuantityMeasurementDbContext))]
-    [Migration("20260417115744_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260418060415_IntialCreate")]
+    partial class IntialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.5")
+                .HasAnnotation("ProductVersion", "8.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -59,7 +59,7 @@ namespace QuantityMeasurementRepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("QuantityMeasurements");
+                    b.ToTable("QuantityMeasurement");
                 });
 
             modelBuilder.Entity("QuantityMeasurementModelLayer.Entities.UserEntity", b =>
@@ -87,7 +87,7 @@ namespace QuantityMeasurementRepositoryLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 #pragma warning restore 612, 618
         }
