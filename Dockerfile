@@ -1,10 +1,18 @@
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+# ---------- Build Stage ----------
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
+
 COPY . .
 RUN dotnet restore QuantityMeasurementApp/QuantityMeasurementWebAPI/QuantityMeasurementWebAPI.csproj
 RUN dotnet publish QuantityMeasurementApp/QuantityMeasurementWebAPI/QuantityMeasurementWebAPI.csproj -c Release -o /app/publish
 
-FROM mcr.microsoft.com/dotnet/aspnet:10.0
+# ---------- Runtime Stage ----------
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
+
 COPY --from=build /app/publish .
+
+EXPOSE 80
+EXPOSE 8080
+
 ENTRYPOINT ["dotnet", "QuantityMeasurementWebAPI.dll"]
